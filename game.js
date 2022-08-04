@@ -7,7 +7,7 @@ class Game {
     this.newGame = true;
   }
   whichTurn() {
-    if ((header.innerText = "It's ⭕️'s turn")) {
+    if (header.innerText === "It's ⭕️'s turn") {
       this.turn = "⭕️";
     } else {
       this.turn = "❌";
@@ -17,7 +17,7 @@ class Game {
     this.dataTrack++;
   }
 
-  displayScore(player) {
+  displayScore() {
     if (this.winner === "❌") {
       var playerOne = new Player("one", "❌");
       playerOne.increaseWins();
@@ -27,10 +27,10 @@ class Game {
       playerTwo.increaseWins();
       playerOWins.innerHTML = `${playerTwo.wins} Wins`;
     }
-    console.log(playerOne);
-    console.log(playerTwo);
+    console.log(game);
   }
   restartGame(turn) {
     game = new Game(turn);
+    changeHeader();
   }
 }
