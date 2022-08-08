@@ -16,15 +16,7 @@ class Game {
   iconTrack() {
     this.dataTrack++;
   }
-  displayScore() {
-    if (this.winner === "❌") {
-      playerOne.increaseWins();
-      playerXWins.innerText = `${playerOne.wins} Wins`;
-    } else {
-      playerTwo.increaseWins();
-      playerOWins.innerText = `${playerTwo.wins} Wins`;
-    }
-  }
+
   restartGame(turn) {
     game = new Game(turn);
   }

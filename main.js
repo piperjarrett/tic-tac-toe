@@ -1,6 +1,6 @@
 //Query Selectors
 gridItem = document.querySelector("#grid");
-indGridItem = document.querySelectorAll(".grid-item");
+indGridItem = document.querySelectorAll("div");
 header = document.querySelector("#header");
 gridItemOneText = document.querySelector("#one");
 gridItemTwoText = document.querySelector("#two");
@@ -35,6 +35,7 @@ function changeDom(event) {
   } else if (header.innerText === "It's ⭕️'s turn" && eventTargetText === "") {
     header.innerText = "It's ❌'s turn";
     addPlayerOIcon();
+    game.whichTurn();
     game.iconTrack();
   }
   eventTargetText = event.target.innerText;
@@ -115,7 +116,10 @@ function winner(event) {
   ) {
     game.winner = eventTargetText;
     header.innerText = `${eventTargetText} wins!`;
-    game.displayScore();
+    console.log(game);
+    displayScore();
+    console.log(playerOne);
+    console.log(playerTwo);
     setTimeout(restartDom, 2000);
   }
 }
@@ -135,9 +139,20 @@ function restartDom() {
     header.innerText = "It's ❌'s turn";
     game.restartGame("❌");
   } else if (game.winner === "") {
-    header.innerText = `It's ${eventTargetText}'s turn'`;
+    header.innerText = `It's ${game.turn}'s turn`;
+    game.restartGame();
   }
   for (var i = 0; i < indGridItem.length; i++) {
     indGridItem[i].innerText = " ";
+  }
+}
+
+function displayScore() {
+  if (game.winner === "❌") {
+    playerOne.increaseWins();
+    playerXWins.innerText = `${playerOne.wins} Wins`;
+  } else {
+    playerTwo.increaseWins();
+    playerOWins.innerText = `${playerTwo.wins} Wins`;
   }
 }

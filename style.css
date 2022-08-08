@@ -8,18 +8,14 @@ main {
   background-color: #fffbda;
   display: flex;
   color: #cb7b00;
-  /* text-shadow: 2px 2px #ffc900; */
-  /* align-items: stretch; */
 }
 
-/* -------------------------------LEFT NAV SECTION */
+/* -------------------------------NAV SECTIONS */
 .left-nav,
 .right-nav {
   background-color: #fee176;
   width: 25%;
   text-align: center;
-
-  /* height: auto; */
 }
 
 p {
@@ -46,7 +42,6 @@ p {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* height: auto; */
 }
 
 .header {
@@ -57,13 +52,14 @@ p {
 h1 {
   font-size: 35px;
 }
+
 .tic-tac-toe-grid {
   display: grid;
   grid-template-columns: auto auto auto;
   margin-bottom: 40%;
 }
 
-.grid-item {
+div {
   border: solid red;
   width: 100px;
   height: 100px;
@@ -73,28 +69,26 @@ h1 {
   font-size: 22px;
 }
 
-#one,
-#two,
-#three {
+.grid-item-one,
+.grid-item-two,
+.grid-item-three {
   border-top: none;
 }
 
-#one,
-#four,
-#seven {
+.grid-item-one,
+.grid-item-four,
+.grid-item-seven {
   border-left: none;
 }
 
-#three,
-#six,
-#nine {
+.grid-item-three,
+.grid-item-six,
+.grid-item-nine {
   border-right: none;
 }
 
-#seven,
-#eight,
-#nine {
+.grid-item-seven,
+.grid-item-eight,
+.grid-item-nine {
   border-bottom: none;
 }
-
-/* -------------------------------RIGHT NAV SECTION */
