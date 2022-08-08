@@ -16,21 +16,16 @@ class Game {
   iconTrack() {
     this.dataTrack++;
   }
-
   displayScore() {
     if (this.winner === "❌") {
-      var playerOne = new Player("one", "❌");
       playerOne.increaseWins();
-      playerXWins.innerHTML = `${playerOne.wins} Wins`;
+      playerXWins.innerText = `${playerOne.wins} Wins`;
     } else {
-      var playerTwo = new Player("two", "⭕️");
       playerTwo.increaseWins();
-      playerOWins.innerHTML = `${playerTwo.wins} Wins`;
+      playerOWins.innerText = `${playerTwo.wins} Wins`;
     }
-    console.log(game);
   }
   restartGame(turn) {
     game = new Game(turn);
-    changeHeader();
   }
 }
