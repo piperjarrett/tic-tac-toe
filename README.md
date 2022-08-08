@@ -1,6 +1,6 @@
-# Tic-Tac-Toe
+## Tic-Tac-Toe
 
-## Contributor
+### Contributor
 
 * Piper Jarrett
 
