@@ -12,7 +12,7 @@
 
 This is a game of tic-tac-toe that you can play with your friend sitting next to you. The header displays whether it is Player X's turn or Player O's turn. The game can be finished from each player winning, or a draw. A new game is generated with the player who lost the game before. The project Spec is found [here](https://frontend.turing.edu/projects/module-1/tic-tac-toe-solo-v2.html) and has a video along with it. 
 
-My a video of my project can be found [here](file:///Users/piperjarrett/modOne/tic-tac-toe/index.html).
+My a video of my project can be found [here](file:///Users/piperjarrett/modOne/tic-tac-toe/).
 
 
 ### Learning Goals
