@@ -1,18 +1,18 @@
 //Query Selectors
-gridItem = document.querySelector("#grid");
-indGridItem = document.querySelectorAll("div");
-header = document.querySelector("#header");
-gridItemOneText = document.querySelector("#one");
-gridItemTwoText = document.querySelector("#two");
-gridItemThreeText = document.querySelector("#three");
-gridItemFourText = document.querySelector("#four");
-gridItemFiveText = document.querySelector("#five");
-gridItemSixText = document.querySelector("#six");
-gridItemSevenText = document.querySelector("#seven");
-gridItemEightText = document.querySelector("#eight");
-gridItemNineText = document.querySelector("#nine");
-playerXWins = document.querySelector("#playerXWins");
-playerOWins = document.querySelector("#playerOWins");
+var gridItem = document.querySelector("#grid");
+var indGridItem = document.querySelectorAll("div");
+var header = document.querySelector("#header");
+var gridItemOneText = document.querySelector("#one");
+var gridItemTwoText = document.querySelector("#two");
+var gridItemThreeText = document.querySelector("#three");
+var gridItemFourText = document.querySelector("#four");
+var gridItemFiveText = document.querySelector("#five");
+var gridItemSixText = document.querySelector("#six");
+var gridItemSevenText = document.querySelector("#seven");
+var gridItemEightText = document.querySelector("#eight");
+var gridItemNineText = document.querySelector("#nine");
+var playerXWins = document.querySelector("#playerXWins");
+var playerOWins = document.querySelector("#playerOWins");
 
 //Event Listeners
 gridItem.addEventListener("click", changeDom);
@@ -27,14 +27,14 @@ function changeDom(event) {
   eventTarget = event.target.id;
   game.newGame = false;
   eventTargetText = event.target.innerText;
-  if (header.innerText === "It's ❌'s turn" && eventTargetText === "") {
+  if (game.turn === "❌" && eventTargetText === "") {
     header.innerText = "It's ⭕️'s turn";
-    addPlayerXIcon();
+    addPlayerIcon("❌", eventTarget);
     game.whichTurn();
     game.iconTrack();
-  } else if (header.innerText === "It's ⭕️'s turn" && eventTargetText === "") {
+  } else if (game.turn === "⭕️" && eventTargetText === "") {
     header.innerText = "It's ❌'s turn";
-    addPlayerOIcon();
+    addPlayerIcon("⭕️", eventTarget);
     game.whichTurn();
     game.iconTrack();
   }
@@ -43,51 +43,15 @@ function changeDom(event) {
   winner();
 }
 
-function addPlayerXIcon(event) {
-  if (eventTarget === "one") {
-    gridItemOneText.innerText = "❌";
-  } else if (eventTarget === "two") {
-    gridItemTwoText.innerText = "❌";
-  } else if (eventTarget === "three") {
-    gridItemThreeText.innerText = "❌";
-  } else if (eventTarget === "four") {
-    gridItemFourText.innerText = "❌";
-  } else if (eventTarget === "five") {
-    gridItemFiveText.innerText = "❌";
-  } else if (eventTarget === "six") {
-    gridItemSixText.innerText = "❌";
-  } else if (eventTarget === "seven") {
-    gridItemSevenText.innerText = "❌";
-  } else if (eventTarget === "eight") {
-    gridItemEightText.innerText = "❌";
-  } else if (eventTarget === "nine") {
-    gridItemNineText.innerText = "❌";
+function addPlayerIcon(icon, eventTarget) {
+  for (var i = 0; i < indGridItem.length; i++) {
+    if (eventTarget === indGridItem[i].id) {
+      indGridItem[i].innerText = icon;
+    }
   }
 }
 
-function addPlayerOIcon(event) {
-  if (eventTarget === "one") {
-    gridItemOneText.innerText = "⭕️";
-  } else if (eventTarget === "two") {
-    gridItemTwoText.innerText = "⭕️";
-  } else if (eventTarget === "three") {
-    gridItemThreeText.innerText = "⭕️";
-  } else if (eventTarget === "four") {
-    gridItemFourText.innerText = "⭕️";
-  } else if (eventTarget === "five") {
-    gridItemFiveText.innerText = "⭕️";
-  } else if (eventTarget === "six") {
-    gridItemSixText.innerText = "⭕️";
-  } else if (eventTarget === "seven") {
-    gridItemSevenText.innerText = "⭕️";
-  } else if (eventTarget === "eight") {
-    gridItemEightText.innerText = "⭕️";
-  } else if (eventTarget === "nine") {
-    gridItemNineText.innerText = "⭕️";
-  }
-}
-
-function winner(event) {
+function winner() {
   if (
     (gridItemOneText.innerText === gridItemTwoText.innerText &&
       gridItemOneText.innerText === gridItemThreeText.innerText &&
@@ -116,18 +80,26 @@ function winner(event) {
   ) {
     game.winner = eventTargetText;
     header.innerText = `${eventTargetText} wins!`;
-    console.log(game);
     displayScore();
-    console.log(playerOne);
-    console.log(playerTwo);
     setTimeout(restartDom, 2000);
   }
 }
+
 function draw() {
   if (game.dataTrack === 9) {
     header.innerText = "It's a draw!";
     game.draw = true;
     setTimeout(restartDom, 2000);
+  }
+}
+
+function displayScore() {
+  if (game.winner === "❌") {
+    playerOne.increaseWins();
+    playerXWins.innerText = `${playerOne.wins} Wins`;
+  } else {
+    playerTwo.increaseWins();
+    playerOWins.innerText = `${playerTwo.wins} Wins`;
   }
 }
 
@@ -140,19 +112,9 @@ function restartDom() {
     game.restartGame("❌");
   } else if (game.winner === "") {
     header.innerText = `It's ${game.turn}'s turn`;
-    game.restartGame();
+    game.restartGame(game.turn);
   }
   for (var i = 0; i < indGridItem.length; i++) {
     indGridItem[i].innerText = " ";
-  }
-}
-
-function displayScore() {
-  if (game.winner === "❌") {
-    playerOne.increaseWins();
-    playerXWins.innerText = `${playerOne.wins} Wins`;
-  } else {
-    playerTwo.increaseWins();
-    playerOWins.innerText = `${playerTwo.wins} Wins`;
   }
 }
