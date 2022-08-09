@@ -1,19 +1,19 @@
 //Query Selectors
-gridItem = document.querySelector("#grid");
-indGridItem = document.querySelectorAll("div");
-header = document.querySelector("#header");
-gridItemOneText = document.querySelector("#one");
-gridItemTwoText = document.querySelector("#two");
-gridItemThreeText = document.querySelector("#three");
-gridItemFourText = document.querySelector("#four");
-gridItemFiveText = document.querySelector("#five");
-gridItemSixText = document.querySelector("#six");
-gridItemSevenText = document.querySelector("#seven");
-gridItemEightText = document.querySelector("#eight");
-gridItemNineText = document.querySelector("#nine");
-playerXWins = document.querySelector("#playerXWins");
-playerOWins = document.querySelector("#playerOWins");
-gameBoard = document.querySelector(".grid-item");
+var gridItem = document.querySelector("#grid");
+var indGridItem = document.querySelectorAll("div");
+var header = document.querySelector("#header");
+var gridItemOneText = document.querySelector("#one");
+var gridItemTwoText = document.querySelector("#two");
+var gridItemThreeText = document.querySelector("#three");
+var gridItemFourText = document.querySelector("#four");
+var gridItemFiveText = document.querySelector("#five");
+var gridItemSixText = document.querySelector("#six");
+var gridItemSevenText = document.querySelector("#seven");
+var gridItemEightText = document.querySelector("#eight");
+var gridItemNineText = document.querySelector("#nine");
+var playerXWins = document.querySelector("#playerXWins");
+var playerOWins = document.querySelector("#playerOWins");
+
 //Event Listeners
 gridItem.addEventListener("click", changeDom);
 
@@ -27,18 +27,17 @@ function changeDom(event) {
   eventTarget = event.target.id;
   game.newGame = false;
   eventTargetText = event.target.innerText;
-  if (header.innerText === "It's ❌'s turn" && eventTargetText === "") {
+  if (game.turn === "❌" && eventTargetText === "") {
     header.innerText = "It's ⭕️'s turn";
     addPlayerIcon("❌", eventTarget);
     game.whichTurn();
     game.iconTrack();
-  } else if (header.innerText === "It's ⭕️'s turn" && eventTargetText === "") {
+  } else if (game.turn === "⭕️" && eventTargetText === "") {
     header.innerText = "It's ❌'s turn";
     addPlayerIcon("⭕️", eventTarget);
     game.whichTurn();
     game.iconTrack();
   }
-  console.log(game.turn);
   eventTargetText = event.target.innerText;
   draw();
   winner();
@@ -82,7 +81,6 @@ function winner() {
     game.winner = eventTargetText;
     header.innerText = `${eventTargetText} wins!`;
     displayScore();
-    console.log(game);
     setTimeout(restartDom, 2000);
   }
 }
@@ -91,7 +89,6 @@ function draw() {
   if (game.dataTrack === 9) {
     header.innerText = "It's a draw!";
     game.draw = true;
-    console.log(game);
     setTimeout(restartDom, 2000);
   }
 }
@@ -115,10 +112,9 @@ function restartDom() {
     game.restartGame("❌");
   } else if (game.winner === "") {
     header.innerText = `It's ${game.turn}'s turn`;
-    game.restartGame();
+    game.restartGame(game.turn);
   }
   for (var i = 0; i < indGridItem.length; i++) {
     indGridItem[i].innerText = " ";
   }
-  console.log(game);
 }
